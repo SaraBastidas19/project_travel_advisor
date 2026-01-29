@@ -3,47 +3,55 @@ import { Autocomplete, Box } from "@mui/material";
 import { AppBar, Toolbar, Typography, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-import useStyles from "./styles.js";
-
-
 const Header = () => {
-
-  const classes = useStyles();
-
   return (
     <AppBar position="static">
-      <Toolbar className={classes.toolbar}>
-        <Typography variant="h5" className={classes.title}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography variant="h5" sx={{ display: { xs: 'none', sm: 'block' } }}>
           Travel Advisor
         </Typography>
-        <Box display= "flex">
-          <Typography variant="h6" className={classes.title}>
+        <Box display="flex" alignItems="center">
+          <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'block' }, mr: 2 }}>
             Explore new places
           </Typography>
-          {/* <Autocomplete> */}
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon placeholder="Search..." classes={{root: classes.inputRoot, input: classes.inputInput}}/>
-
-              </div>
-              <InputBase />
-
-            </div>
-          {/*</Autocomplete>*/}
-
-        </Box>
-        <Autocomplete
-          style={{ width: 300 }}
-          freeSolo
-          options={[]}
-          renderInput={(params) => (
-            <InputBase
-              ref={params.InputProps.ref}
+          <Box 
+            sx={{ 
+              position: 'relative',
+              borderRadius: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.25)' },
+              mr: 2,
+              ml: 0,
+              width: '100%',
+              '@media (min-width: 600px)': { ml: 3, width: 'auto' },
+            }}
+          >
+            <Box sx={{ 
+              padding: '0 16px', 
+              height: '100%', 
+              position: 'absolute', 
+              pointerEvents: 'none', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+            }}>
+              <SearchIcon />
+            </Box>
+            <InputBase 
               placeholder="Search..."
-              inputProps={params.inputProps}
+              sx={{ 
+                color: 'inherit',
+                '& .MuiInputBase-input': {
+                  padding: '8px 8px 8px 0', 
+                  paddingLeft: '40px', 
+                  transition: 'width 300ms',
+                  width: '100%', 
+                  '@media (min-width: 960px)': { width: '20ch' },
+                }
+              }}
             />
-          )}
-        />
+          </Box>
+        </Box>
       </Toolbar>
     </AppBar> 
   );
